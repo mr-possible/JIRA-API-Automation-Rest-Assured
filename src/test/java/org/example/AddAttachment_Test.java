@@ -2,20 +2,19 @@ package org.example;
 
 import io.restassured.RestAssured;
 import io.restassured.filter.session.SessionFilter;
-import org.example.payload.AddCommentJSON;
 import org.example.payload.UserCredentialsJSON;
 
 import static io.restassured.RestAssured.given;
 
 /**
  * Created By: Sambhav
- * Created On: 15-10-2020 || 10:43 PM
+ * Created On: 24-11-2020 || 12:12 PM
  * Project Name: jira-api-automation
  **/
 
-public class AddComment_01 {
-    public static void main(String[] args) {
+public class AddAttachment_Test {
 
+    public static void main(String[] args) {
         RestAssured.baseURI = "http://localhost:8080/";
 
         SessionFilter session = new SessionFilter();
@@ -35,19 +34,17 @@ public class AddComment_01 {
                         .assertThat().statusCode(200)
                         .extract().response().asString();
 
-        //For Adding a comment based on an issue-id.
+        //Add attachment
         given()
                 .log().all()
                 .filter(session)
-                .pathParam("id", "10002")
-                .header("Content-Type", "application/json")
-                .body(AddCommentJSON.getCommentInfo())
+                .body(UserCredentialsJSON.getCurrentUser())
+                .header("X-Atlassian-Token", "no-check")
 
                 .when()
-                .post("/rest/api/2/issue/{id}/comment")
+                .post("/rest/api/2/issue/{issueIdOrKey}/attachments")
 
                 .then()
-                .log().all()
-                .assertThat().statusCode(201);
+                .assertThat().statusCode(200);
     }
 }

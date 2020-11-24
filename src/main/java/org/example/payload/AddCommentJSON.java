@@ -8,7 +8,7 @@ package org.example.payload;
 public class AddCommentJSON {
     public static String getCommentInfo() {
         return "{\n" +
-                "    \"body\": \"This is test comment generate by Test Automation using Rest-Assured.\",\n" +
+                "    \"body\": \"Test comment generated on 24th Nov 2020.\",\n" +
                 "    \"visibility\": {\n" +
                 "        \"type\": \"role\",\n" +
                 "        \"value\": \"Administrators\"\n" +
