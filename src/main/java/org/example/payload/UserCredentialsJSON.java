@@ -13,4 +13,11 @@ public class UserCredentialsJSON {
                 "    \"password\":\"Sambhav@6197\"\n" +
                 "}";
     }
+
+    public static String getUserName() {
+        return "{\n" +
+                "    \"username\":\"samd6197\",\n" +
+                "    \"password\":\"Sambhav@6197\"\n" +
+                "}";
+    }
 }

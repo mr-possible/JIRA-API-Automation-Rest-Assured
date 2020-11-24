@@ -4,6 +4,8 @@ import io.restassured.RestAssured;
 import io.restassured.filter.session.SessionFilter;
 import org.example.payload.UserCredentialsJSON;
 
+import java.io.File;
+
 import static io.restassured.RestAssured.given;
 
 /**
@@ -38,11 +40,13 @@ public class AddAttachment_Test {
         given()
                 .log().all()
                 .filter(session)
-                .body(UserCredentialsJSON.getCurrentUser())
+                .pathParam("id", "10002")
                 .header("X-Atlassian-Token", "no-check")
+                .header("Content-Type", "multipart/form-data")
+                .multiPart("attachment", new File("src/main/java/org/example/attachments/demo.txt"))
 
                 .when()
-                .post("/rest/api/2/issue/{issueIdOrKey}/attachments")
+                .post("/rest/api/2/issue/{id}/attachments")
 
                 .then()
                 .assertThat().statusCode(200);
